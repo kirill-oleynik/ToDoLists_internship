@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+ pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: ToDoLists_internship_development
+test:
+  <<: *default
+  database: ToDoLists_internship_test
+#     url: <%= ENV['MY_APP_DATABASE_URL'] %>
+production:
+  <<: *default
+  database: ToDoLists_internship_production
+  username: ToDoLists_internship
+  password: <%= ENV['TODOLISTS_INTERNSHIP_DATABASE_PASSWORD'] %>
