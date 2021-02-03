@@ -8,5 +8,8 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
   config.shared_context_metadata_behavior = :apply_to_host_groups
+  config.order = :random
+  config.raise_errors_for_deprecations!
+  config.raise_on_warning = true
   Kernel.srand config.seed
 end
