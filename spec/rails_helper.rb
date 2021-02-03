@@ -18,6 +18,7 @@ rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
+ActiveRecord::Migration.check_pending!
 RSpec.configure do |config|
   config.include Requests::JsonHelpers, type: :request
   config.use_transactional_fixtures = true
