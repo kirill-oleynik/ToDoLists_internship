@@ -11,7 +11,7 @@ gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.1'
 gem 'rubocop-graphql', require: false
 # gem 'redis', '~> 4.0'
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 # gem 'image_processing', '~> 1.2'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rack-cors'
