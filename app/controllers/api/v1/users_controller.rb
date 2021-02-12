@@ -2,15 +2,15 @@
 
 module API
   module V1
-    class UsersController < Apicontroller
+    class UsersController < ApiController
       def create
-        endpoint operation: User::Create
+        endpoint operation: API::V1::Users::Operation::Create
       end
 
       private
 
       def default_handler
-        super.merge(success: ->(result, **) { head :created })
+        super.merge(success: ->(_result, **) { head :created })
       end
     end
   end
