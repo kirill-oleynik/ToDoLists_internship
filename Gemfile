@@ -5,10 +5,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.1'
 
+gem 'dry-validation', '~> 1.6'
 gem 'jsonapi-serializer', '~> 2.1'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.1'
+gem 'reform-rails', '~> 0.2.1'
 gem 'rubocop-graphql', require: false
 # gem 'redis', '~> 4.0'
 gem 'bcrypt', '~> 3.1.7'
