@@ -13,3 +13,10 @@ Style/Documentation:
   Exclude:
         - 'app/models/application_record.rb'
         - 'app/controllers/**/*'
+RSpec/MultipleExpectations:
+  Enabled: true
+  Max: 3
+RSpec/NestedGroups:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false
