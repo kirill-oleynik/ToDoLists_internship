@@ -21,6 +21,7 @@ gem 'rack-cors'
 gem 'dry-validation', '~> 1.6'
 gem 'simple_endpoint', '~> 1.0'
 gem 'trailblazer', '~> 2.1'
+gem 'trailblazer-operation', '~> 0.6.6'
 group :development, :test do
   gem 'awesome_print', '~> 1.8'
   gem 'bullet', '~> 6.1'

@@ -336,6 +336,7 @@ DEPENDENCIES
   simple_endpoint (~> 1.0)
   spring
   trailblazer (~> 2.1)
+  trailblazer-operation (~> 0.6.6)
   tzinfo-data
 
 RUBY VERSION
