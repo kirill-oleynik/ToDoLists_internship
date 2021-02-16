@@ -5,7 +5,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.1'
 
-gem 'dry-validation', '~> 1.6'
 gem 'jsonapi-serializer', '~> 2.1'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
@@ -18,6 +17,10 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rack-cors'
 
+# Trailblazer bundle
+gem 'dry-validation', '~> 1.6'
+gem 'simple_endpoint', '~> 1.0'
+gem 'trailblazer', '~> 2.1'
 group :development, :test do
   gem 'awesome_print', '~> 1.8'
   gem 'bullet', '~> 6.1'
