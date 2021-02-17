@@ -1,16 +1,14 @@
 # frozen_string_literal: true
 
-require 'trailblazer/operation'
-
 module API
   module V1
     module Users
       module Operation
         class Create < ApplicationOperation
           step Model(User, :new)
-          step Contract::Build(Constant: API::V1::Users::Contract::Create)
-          step Contract::Validate()
-          step Contract::Persist()
+          step Trailblazer::Operation::Contract::Build(constant: API::V1::Users::Contract::Create)
+          step Trailblazer::Operation::Contract::Validate()
+          step Trailblazer::Operation::Contract::Persist()
         end
       end
     end
