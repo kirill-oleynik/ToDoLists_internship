@@ -16,8 +16,16 @@ RSpec.describe API::V1::Users::Contract::Create, type: :contract do
   end
 
   context 'when one attribute missing' do
+    let(:params) { attributes_for(:user).merge(password: nil) }
+
+    describe ':password' do
+      it 'returns expected errors' do
+        expect(contract.errors[:password]).to include('must be filled')
+      end
+    end
+
     describe ':username' do
-      let(:params) { attributes_for(:user).merge(username: '') }
+      let(:params) { attributes_for(:user).merge(username: nil) }
 
       it 'returns expected error' do
         expect(contract.errors.size).to eq(1)
@@ -26,11 +34,20 @@ RSpec.describe API::V1::Users::Contract::Create, type: :contract do
     end
 
     describe ':email' do
-      let(:params) { attributes_for(:user).merge(email: '') }
+      let(:params) { attributes_for(:user).merge(email: nil) }
 
       it 'returns expected error' do
         expect(contract.errors.size).to eq(1)
         expect(contract.errors[:email]).to include('must be filled')
+      end
+    end
+
+    describe ':password_confirmation' do
+      let(:params) { attributes_for(:user).merge(password_confirmation: nil) }
+
+      it 'returns expected errors' do
+        expect(contract.errors.size).to eq(1)
+        expect(contract.errors[:password_confirmation]).to include('must be filled')
       end
     end
   end
@@ -59,6 +76,15 @@ RSpec.describe API::V1::Users::Contract::Create, type: :contract do
         it 'returns expected error' do
           expect(contract.errors.size).to eq(1)
           expect(contract.errors[:email]).to include('must be a string')
+        end
+      end
+
+      describe 'when passwordsize is less then required' do
+        let(:params) { attributes_for(:user).merge(password: '123') }
+
+        it 'returns expected errors' do
+          expect(contract.errors[:password])
+            .to include("size cannot be less than #{Constants::User::PASSWORD_MIN_SIZE}")
         end
       end
     end

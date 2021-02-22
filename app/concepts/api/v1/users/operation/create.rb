@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# Create User entity operation
 module API::V1::Users::Operation
   # Create User entity operation
   class Create < ApplicationOperation

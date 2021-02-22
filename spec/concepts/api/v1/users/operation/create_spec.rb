@@ -8,6 +8,7 @@ RSpec.describe API::V1::Users::Operation::Create, type: :operation do
 
     it 'succeeds' do
       expect(result.success?).to equal(true)
+      expect(User.count).to eq(1)
     end
   end
 
@@ -47,7 +48,7 @@ RSpec.describe API::V1::Users::Operation::Create, type: :operation do
     describe 'password_confirmation does not matcth password' do
       let(:params) { attributes_for(:user).merge(password_confirmation: Faker::Internet.password) }
 
-      it 'doe not succeed' do
+      it 'does not succeed' do
         expect(result.failure?).to equal(true)
       end
     end
