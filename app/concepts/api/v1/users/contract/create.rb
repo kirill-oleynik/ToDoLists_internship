@@ -7,9 +7,7 @@ module API::V1::Users::Contract
     property :email
     property :password
     property :password_confirmation
-    # property :password_confirmation, virtual: true
     validation :default do
-      config.messages.namespace = :user
       params do
         required(:username).filled(:string)
         required(:email).filled(:string, format?: Constants::User::EMAIL_REGEXP)
@@ -19,9 +17,12 @@ module API::V1::Users::Contract
       rule(:username) do
         key.failure(:exists?) if ::User.exists?(username: value)
       end
-      rule(:password_confirmation,:password) do
-          key.failure(:match?) if values[:password] != values[:password_confirmation]
-        end
+      rule(:email) do
+        key.failure(:exists?) if ::User.exists?(email: value)
+      end
+      rule(:password_confirmation, :password) do
+        key.failure(:eql?) if values[:password] != values[:password_confirmation]
+      end
     end
   end
 end
