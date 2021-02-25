@@ -8,6 +8,7 @@ AllCops:
     - 'app/mailers/**/*'
     - 'app/jobs/**/*'
     - 'app/channels/**/*'
+    - 'vendor/bundle/**/*'
 Style/Documentation:
   Enabled: true
   Exclude:
