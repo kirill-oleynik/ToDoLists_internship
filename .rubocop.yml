@@ -1,6 +1,7 @@
 require: rubocop-performance
 require: rubocop-rspec
 AllCops:
+  DisplayCopNames: true
   Exclude:
     - 'db/**/*'
     - 'config/**/*'
@@ -20,6 +21,8 @@ RSpec/MultipleExpectations:
 RSpec/NestedGroups:
   Enabled: false
 Metrics/BlockLength:
-  Enabled: false
+  Enabled: true
+  Exclude:
+    - spec/**/*
 Style/ClassAndModuleChildren:
   Enabled: false
