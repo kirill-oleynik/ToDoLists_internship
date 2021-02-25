@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Error Serializer
 class ErrorSerializer
   def initialize(contract)
     @contract = contract
