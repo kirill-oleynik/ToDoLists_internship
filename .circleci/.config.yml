@@ -1,0 +1,43 @@
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@1.0
+
+jobs:
+  lintering:
+    docker:
+      - image: cimg/ruby:2.7.1
+    steps:
+      - checkout
+      - ruby/install-deps
+      - run:
+          name: rubocop
+          command: bundle exec rubocop
+
+  test:
+    docker:
+      - image: cimg/ruby:2.7.1
+      - image: circleci/postgres:13
+        environment:
+          POSTGRES_USER: $POSTGRES_USER
+          POSTGRES_DB: $POSTGRES_DB
+          POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+    environment:
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_DB: $POSTGRES_DB
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+    steps:
+      - checkout
+      - ruby/install-deps
+      - run:
+          name: Database setup
+          command: bundle exec rails db:schema:load --trace
+      - run:
+          name: run specs
+          command: bundle exec rspec
+
+workflows:
+  version: 2
+  lint_and_test:
+    jobs:
+      - lintering
