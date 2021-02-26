@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe API::V1::Users::Operation::Create, type: :operation do
+RSpec.describe API::V1::User::Operation::Create, type: :operation do
   subject(:result) { described_class.call(params: params) }
 
   context 'when all params are valid' do

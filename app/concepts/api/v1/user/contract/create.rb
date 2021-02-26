@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module API::V1::Users::Contract
+module API::V1::User::Contract
   # Create user entity validation rules
   class Create < ApplicationContract
     property :username

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe API::V1::Users::Contract::Create, type: :contract do
+RSpec.describe API::V1::User::Contract::Create, type: :contract do
   subject(:contract) { described_class.new(user) }
 
   let(:user) { build(:user) }

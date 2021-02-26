@@ -4,7 +4,7 @@ module API
   module V1
     class UsersController < ApplicationController
       def create
-        endpoint operation: API::V1::Users::Operation::Create, options: { params: user_params }
+        endpoint operation: API::V1::User::Operation::Create, options: { params: user_params }
       end
 
       private
