@@ -2,8 +2,11 @@ en:
   dry_validation:
     errors:
       rules:
+        password:
+          valid?: Invalid credentials
         username:
           exists?: Already exists
+          credentials_valid?: Invalid credentials
         email:
           exists?: Already exists
         password_confirmation:
