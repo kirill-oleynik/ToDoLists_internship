@@ -10,7 +10,7 @@ RSpec.describe API::V1::User::Contract::SignIn do
 
   context 'with invalid params' do
     describe 'User with provided :username does not exist' do
-      let(:params) { user_attributes.merge(username: Faker::Name.name) }
+      let(:params) { user_attributes.merge(username: Faker::Internet.username) }
 
       it 'does not succeed' do
         expect(contract.errors.empty?).to equal(false)
