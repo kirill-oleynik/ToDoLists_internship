@@ -4,6 +4,8 @@
 class ToDoListsInternshipSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
+  max_complexity(100)
+  max_depth(10)
 
   # Union and Interface Resolution
   def self.resolve_type(_abstract_type, _obj, _ctx)
