@@ -27,3 +27,7 @@ Metrics/BlockLength:
     - spec/**/*
 Style/ClassAndModuleChildren:
   Enabled: false
+Metrics/MethodLength:
+  Enabled: true
+  Exclude:
+    - 'app/controllers/graphql_controller.rb'
