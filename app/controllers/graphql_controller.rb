@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class APIController < APIController
+class GraphQLController < ::API::V1::APIController
   def execute
     variables = prepare_variables(params[:variables])
     query, operation_name = params.values_at(:query, operationName)

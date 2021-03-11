@@ -4,7 +4,7 @@ module Constants
     EMAIL_REGEXP = /.+@.+\..+/.freeze
   end
   module GraphQL
-    SHEMA_SETTINGS = {
+    SCHEMA_SETTINGS = {
     MAX_COMPLEXITY: 100,
     MAX_DEPTH: 10
   }.freeze
