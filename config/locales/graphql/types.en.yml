@@ -1,0 +1,9 @@
+en:
+  graphql:
+    types:
+      auth_token:
+        desc: Auth token provider
+        fields:
+          scrf: CSRF protection token
+          access: Access JWT token
+          refresh: JWT token for refreshing access token
