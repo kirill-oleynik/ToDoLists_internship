@@ -28,6 +28,7 @@ gem 'trailblazer-operation', '~> 0.6.6'
 group :development, :test do
   gem 'awesome_print', '~> 1.8'
   gem 'bullet', '~> 6.1'
+  gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
   gem 'factory_bot_rails', '~> 6.1'
   gem 'faker', '~> 2.15', '>= 2.15.1'
   gem 'pry-rails', '~> 0.3.9'

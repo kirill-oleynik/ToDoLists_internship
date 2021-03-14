@@ -6,8 +6,7 @@ EXPIRATION = {
 }.freeze
 
 JWTSessions.algorithm = 'HS256'
-JWTSessions.private_key = OpenSSL::PKey::RSA.generate(2048)
-JWTSessions.public_key  = JWTSessions.private_key.public_key
+JWTSessions.encryption_key = ENV['JWTSESSIONS_ENCRYPTION_KEY']
 JWTSessions.access_exp_time = EXPIRATION[:access]
 JWTSessions.refresh_exp_time = EXPIRATION[:refresh]
 JWTSessions.token_store = :memory
