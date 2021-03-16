@@ -2,23 +2,23 @@
 
 module Types
   class AuthTokenType < Base::Object
-      graphql_name 'AuthTokenType'
+    graphql_name 'AuthTokenType'
 
-      description I18n.t('graphql.types.auth_token.desc')
+    description I18n.t('graphql.types.auth_token.desc')
 
-      field :csrf,
-            String,
-            null: false,
-            description: I18n.t('graphql.types.auth_token.fields.csrf')
+    field :csrf,
+          String,
+          null: false,
+          description: I18n.t('graphql.types.auth_token.fields.csrf')
 
-      field :access,
-            String,
-            null: false,
-            description: I18n.t('graphql.types.auth_token.fields.access')
+    field :access,
+          String,
+          null: false,
+          description: I18n.t('graphql.types.auth_token.fields.access')
 
-      field :refresh,
-            String,
-            null: false,
-            description: I18n.t('graphql.types.auth_token.fields.refresh')
+    field :refresh,
+          String,
+          null: false,
+          description: I18n.t('graphql.types.auth_token.fields.refresh')
   end
 end
