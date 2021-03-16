@@ -11,7 +11,7 @@ RSpec.describe JwtSessionBuilder do
 
   it 'uses memory to store sessions' do
     expect(session_builder.store.class)
-      .to eq(JWTSessions::StoreAdapters::MemoryStoreAdapter)
+      .to eq(JWTSessions::StoreAdapters::RedisStoreAdapter)
   end
 
   it 'includes payload with expected user_id' do
