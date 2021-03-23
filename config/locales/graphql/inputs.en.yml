@@ -1,7 +1,7 @@
 en:
   graphql:
     inputs:
-      sign_up_input:
+      sign_up:
         desc: Sign up user via email
         args:
           username: User name
