@@ -5,8 +5,8 @@ module GraphQL
   module MutationHelpers
     def signup_mutation
       %(
-        mutation SignUp($input: SignUp!) {
-          SignUp(input: $input) {
+        mutation($username: String!) {
+          signUp(username: $username) {
             access
             csrf
             refresh

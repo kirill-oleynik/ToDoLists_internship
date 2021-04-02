@@ -6,13 +6,13 @@ RSpec.describe 'mutation userSignUp', type: :request do
   before do
     graphql_post(
       query: signup_mutation,
-      variables: request_params
+      variables: { username: 'lol@lol.lol' }
     )
   end
 
   context 'with all params valid' do
     it 'returns auth tokens' do
-      # binding.pry
+      binding.pry
       # parsed_body['errors']
       #      [{"message"=>"Field 'SignUp' doesn't exist on type 'Mutation'",
       #  "locations"=>[{"line"=>3, "column"=>11}],

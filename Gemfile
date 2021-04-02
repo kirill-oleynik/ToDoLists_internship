@@ -20,6 +20,8 @@ gem 'rubocop-graphql', require: false
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rack-cors'
 
+gem 'dry-matcher', '~> 0.9'
+
 # Trailblazer bundle
 gem 'dry-validation', '~> 1.6'
 gem 'simple_endpoint', '~> 1.0'

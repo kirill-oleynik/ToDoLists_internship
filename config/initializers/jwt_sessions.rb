@@ -7,6 +7,6 @@ JWTSessions.token_store = :redis, {
   token_prefix: ENV['TOKEN_PERFIX']
 }
 JWTSessions.algorithm = 'HS256'
-JWTSessions.encryption_key = ENV['JWTSESSIONS_ENCRYPTION_KEY']
+JWTSessions.encryption_key = 'dsdsafdsfdsfds'
 JWTSessions.access_exp_time = 1.hour
 JWTSessions.refresh_exp_time = 24.hours
