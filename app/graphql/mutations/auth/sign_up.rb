@@ -8,25 +8,25 @@ module Mutations
 
       description I18n.t('graphql.mutations.user.sign_up.desc')
 
-        argument :username,
-                 String,
-                 required: true
-                #  description: I18n.t("#{I18N_PATH}.args.username")
+      argument :username,
+               String,
+               required: true
+      #  description: I18n.t("#{I18N_PATH}.args.username")
 
-        argument :email,
-                 String,
-                 required: true
-                #  description: I18n.t("#{I18N_PATH}.args.email")
+      argument :email,
+               String,
+               required: true
+      #  description: I18n.t("#{I18N_PATH}.args.email")
 
-        argument :password,
-                 String,
-                 required: true
-                #  description: I18n.t("#{I18N_PATH}.args.password")
+      argument :password,
+               String,
+               required: true
+      #  description: I18n.t("#{I18N_PATH}.args.password")
 
-        argument :password_confirmation,
-                 String,
-                 required: true
-                #  description: I18n.t("#{I18N_PATH}.args.password_confirmation")
+      argument :password_confirmation,
+               String,
+               required: true
+      #  description: I18n.t("#{I18N_PATH}.args.password_confirmation")
 
       def resolve(username:, email:, password:, password_confirmation:)
         input = { username: username, email: email, password: password, password_confirmation: password_confirmation }
