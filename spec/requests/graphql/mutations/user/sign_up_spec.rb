@@ -6,22 +6,14 @@ RSpec.describe 'mutation userSignUp', type: :request do
   before do
     graphql_post(
       query: signup_mutation,
-      variables: { username: 'lol@lol.lol' }
+      variables: request_params
     )
   end
 
   context 'with all params valid' do
     it 'returns auth tokens' do
-      binding.pry
-      # parsed_body['errors']
-      #      [{"message"=>"Field 'SignUp' doesn't exist on type 'Mutation'",
-      #  "locations"=>[{"line"=>3, "column"=>11}],
-      #  "path"=>["mutation SignUp", "SignUp"],
-      #  "extensions"=>{"code"=>"undefinedField", "typeName"=>"Mutation", "fieldName"=>"SignUp"}},
-      # {"message"=>"Variable $input is declared by SignUp but not used",
-      #  "locations"=>[{"line"=>2, "column"=>9}],
-      #  "path"=>["mutation SignUp"],
-      #  "extensions"=>{"code"=>"variableNotUsed", "variableName"=>"input"}}]
+      expect(User.count).to eq(1)
+      expect(parsed_body['data']['signUp']['access']).to be_present
     end
   end
 end

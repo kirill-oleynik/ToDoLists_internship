@@ -9,9 +9,10 @@ module API::V1::Auth::Operation
     step Contract::Persist()
     step :generate_auth_token
 
-    def generate_auth_token(context, model:, **)
+    def generate_auth_token(ctx, model:, **)
       session = JwtSessionBuilder.new.call(user_id: model.id)
-      context['result'] = session.login
+      ctx['result'] = session.login
+      ctx['operation_status'] = :success
     end
   end
 end

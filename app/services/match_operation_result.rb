@@ -3,30 +3,9 @@
 # Match Trailblazer operation result service
 class MatchOperationResult
   OperationMatcher = Dry::Matcher.new(
-    file_success: Dry::Matcher::Case.new(
-      match: ->(result) { result.success? && result[:filename] },
-      resolve: ->(result) { result }
-    ),
     success: Dry::Matcher::Case.new(
       match: ->(result) { result.success? },
       resolve: ->(result) { result['result'] }
-    ),
-    completed: Dry::Matcher::Case.new(
-      match: ->(result) { result.success? && result[:operation_status] == :completed },
-      resolve: ->(result) { result['result'] }
-    ),
-    incompleted: Dry::Matcher::Case.new(
-      match: ->(result) { result.failure? && result[:operation_status] == :incompleted },
-      resolve: ->(result) { result }
-    ),
-    validation_error: Dry::Matcher::Case.new(
-      match: lambda do |result|
-        result.failure? &&
-          !result['operation_status'] &&
-          result['result.contract.default'] &&
-          result['result.contract.default'].errors.messages.any?
-      end,
-      resolve: ->(result) { result['result.contract.default'] }
     ),
     not_found: Dry::Matcher::Case.new(
       match: lambda do |result|
@@ -52,21 +31,9 @@ class MatchOperationResult
       match: ->(result) { result.failure? && result['operation_status'] == :execution_error },
       resolve: ->(result) { result }
     ),
-    stripe_error: Dry::Matcher::Case.new(
-      match: ->(result) { result.failure? && result['operation_status'] == :stripe_error },
-      resolve: ->(result) { result }
-    ),
     bad_request: Dry::Matcher::Case.new(
       match: ->(result) { result.failure? && result['operation_status'] == :bad_request },
       resolve: ->(result) { result }
-    ),
-    failure_update: Dry::Matcher::Case.new(
-      match: ->(result) { result.failure? && result['operation_status'] == :with_incorrect_ids },
-      resolve: ->(result) { result['failed_ids'] }
-    ),
-    failure: Dry::Matcher::Case.new(
-      match: ->(result) { result.failure? },
-      resolve: ->(result) { result['result'] }
     )
   )
   #
