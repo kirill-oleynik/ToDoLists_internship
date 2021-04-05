@@ -3,6 +3,7 @@
 module GraphQL
   # GraphQL mutation helper methods
   module MutationHelpers
+    # rubocop:disable Metrics/MethodLength
     def signup_mutation
       %(
         mutation SignUp(
@@ -24,5 +25,6 @@ module GraphQL
         }
       )
     end
+    # rubocop:enable Metrics/MethodLength
   end
 end
