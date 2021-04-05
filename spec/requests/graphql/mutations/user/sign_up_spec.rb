@@ -11,9 +11,19 @@ RSpec.describe 'mutation userSignUp', type: :request do
   end
 
   context 'with all params valid' do
-    it 'returns auth tokens' do
+    let(:user) { User.last }
+
+    it 'returns expected response' do
+      expect(response).to match_json_schema('auth/success/sign_up')
+    end
+
+    it 'creates user with reuested attributes' do
       expect(User.count).to eq(1)
-      expect(parsed_body['data']['signUp']['access']).to be_present
+      expect(user.username).to eq(request_params[:username])
+      expect(user.email).to eq(request_params[:email])
+      expect(
+        user.authenticate(request_params[:password])
+      ).to equal(user)
     end
   end
 end
