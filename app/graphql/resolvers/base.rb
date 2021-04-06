@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
-module Mutations
-  # Base mutation class  with behaviour to be inherited by all inheritors
-  class BaseMutation < GraphQL::Schema::RelayClassicMutation
+module Resolvers
+  # Base resolver
+  class Base < GraphQL::Schema::Resolver
+    def current_user
+      context[:current_user]
+    end
+
     def match_operation(operation_result)
       MatchOperationResult.new.call(
         operation_result: operation_result,

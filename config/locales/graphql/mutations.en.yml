@@ -1,0 +1,12 @@
+en:
+  graphql:
+    mutations:
+      desc: The schema’s entry-point for mutations.
+      common:
+        fields:
+          id: ID
+          uuid: UUID
+      user:
+        sign_up:
+          esc: Sign up a user
+

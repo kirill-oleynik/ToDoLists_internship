@@ -10,3 +10,4 @@ storage/*
 !/storage/.keep
 .byebug_history
 config/master.key
+.env
