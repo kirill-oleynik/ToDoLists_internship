@@ -1,5 +1,5 @@
 {
-  "id": "file:/success/sign_up.json",
+  "id": "file:/auth/success/sign_up.json",
   "type": "object",
   "required": ["data"],
   "properties": {
