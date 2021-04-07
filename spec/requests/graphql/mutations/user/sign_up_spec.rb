@@ -26,4 +26,14 @@ RSpec.describe 'mutation userSignUp', type: :request do
       ).to equal(user)
     end
   end
+
+  context 'without :username' do
+    let(:request_params) do
+      attributes_for(:user).delete_if { |k, _| k == :username }
+    end
+
+    it 'returns expected response' do
+      true
+    end
+  end
 end
