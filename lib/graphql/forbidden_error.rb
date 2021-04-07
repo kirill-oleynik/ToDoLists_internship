@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-i # frozen_string_literal: true
+# frozen_string_literal: true
 
 module GraphQL
   # handles app 403 Forbidden Error

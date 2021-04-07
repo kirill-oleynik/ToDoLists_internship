@@ -27,13 +27,12 @@ RSpec.describe 'mutation userSignUp', type: :request do
     end
   end
 
-  context 'without :username' do
-    let(:request_params) do
-      attributes_for(:user).delete_if { |k, _| k == :username }
-    end
+  context 'user already exists' do
+    let!(:user) { create(:user) }
+    let(:request_params) { attributes_for(:user).merge(username: user.username) }
 
     it 'returns expected response' do
-      true
+      binding.pry
     end
   end
 end
