@@ -7,6 +7,10 @@ class MatchOperationResult
       match: ->(result) { result.success? },
       resolve: ->(result) { result['result'] }
     ),
+    unprocessable_entity: Dry::Matcher::Case.new(
+      match: ->(result) { result.failure? && result['operation_status'] == :unprocessable_entity },
+      resolve: ->(result) { result }
+    ),
     not_found: Dry::Matcher::Case.new(
       match: lambda do |result|
         result.failure? && (
@@ -52,6 +56,10 @@ class MatchOperationResult
 
       m.not_authorized do
         raise GraphQL::ForbiddenError, 'lol'
+      end
+
+      m.unprocessable_entity do |result|
+        raise GraphQL::RuntimeError, result['contract.default'].errors
       end
 
       m.credentials_error do |result|
