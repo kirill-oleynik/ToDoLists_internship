@@ -4,6 +4,9 @@ module Constants
     EMAIL_REGEXP = /.+@.+\..+/.freeze
   end
   module GraphQL
+    RESPONSE_STATUSES = {
+      status422: 'EXECUTION_ERROR'
+    }
     SCHEMA_SETTINGS = {
     MAX_COMPLEXITY: 100,
     MAX_DEPTH: 10

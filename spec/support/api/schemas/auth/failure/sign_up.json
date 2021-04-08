@@ -1,0 +1,19 @@
+{
+  "id": "file:/auth/failure/sign_up.json",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type":"object",
+      "properties": {
+        "signUp": {"type": "null"}
+      }
+    },
+    "errors": {
+      "minItems": 1,
+      "type":"array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}
