@@ -27,12 +27,31 @@ RSpec.describe 'mutation userSignUp', type: :request do
     end
   end
 
-  context 'user already exists' do
+  context 'with already existing :username' do
     let!(:user) { create(:user) }
     let(:request_params) { attributes_for(:user).merge(username: user.username) }
 
     it 'returns expected response' do
-      binding.pry
+      expect(error_info).to include(':username')
+      expect(response).to match_json_schema('auth/failure/sign_up')
+      expect(graphql_response_error_status_code)
+        .to eq(Constants::GraphQL::RESPONSE_STATUSES[:status422])
+    end
+  end
+
+  context 'with confirmation not matching password' do
+    let(:request_params) do
+      attributes_for(:user).merge(
+        password: Faker::Internet.unique.password,
+        password_confirmation: Faker::Internet.unique.password
+      )
+    end
+
+    it 'returns expected response' do
+      expect(error_info).to include(':password_confirmation')
+      expect(response).to match_json_schema('auth/failure/sign_up')
+      expect(graphql_response_error_status_code)
+        .to eq(Constants::GraphQL::RESPONSE_STATUSES[:status422])
     end
   end
 end
