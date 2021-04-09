@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 JWTSessions.token_store = :redis, {
-  redis_host: ENV['REDIS_HOST'],
-  redis_port: ENV['REDIS_PORT'],
-  redis_db_name: ENV['REDIS_DB_NAME'],
-  token_prefix: ENV['TOKEN_PERFIX']
+  redis_host: Rails.application.credentials.redis[:host],
+  redis_port: Rails.application.credentials.redis[:port],
+  redis_db_name: Rails.application.credentials.redis[:db_name],
+  token_prefix:  Rails.application.credentials.redis[:token_prefix]
 }
 JWTSessions.algorithm = 'HS256'
-JWTSessions.encryption_key = 'dsdsafdsfdsfds'
+JWTSessions.encryption_key = Rails.application.credentials.secret_key_base
 JWTSessions.access_exp_time = 1.hour
 JWTSessions.refresh_exp_time = 24.hours
