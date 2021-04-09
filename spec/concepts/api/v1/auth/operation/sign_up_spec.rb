@@ -21,6 +21,14 @@ RSpec.describe API::V1::Auth::Operation::SignUp, type: :operation do
       expect(result[:result][:access]).to be_a(String)
     end
 
+    it 'includes info about refresh token expiration time' do
+      expect(result[:result]).to have_key(:refresh_expires_at)
+    end
+
+    it 'includes info about access token expiration time' do
+      expect(result[:result]).to have_key(:access_expires_at)
+    end
+
     it 'includes :refresh token at result' do
       expect(result[:result]).to have_key(:refresh)
       expect(result[:result][:refresh]).to be_a(String)
