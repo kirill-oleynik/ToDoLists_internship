@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe JwtSessionBuilder do
+RSpec.describe JwtSession::Build do
   subject(:session_builder) { described_class.new.call(user_id: user_id) }
 
   let(:user_id) { create(:user).id }
