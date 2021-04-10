@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module JwtSession
-  # Responsible for building jwt user session
-  class Build
+  # Responsible for creating user session
+  class Create
     def initialize(session: JWTSessions::Session)
       @session = session
     end

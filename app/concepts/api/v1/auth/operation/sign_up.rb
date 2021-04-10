@@ -19,7 +19,7 @@ module API::V1::Auth::Operation
     end
 
     def generate_auth_token(ctx, model:, **)
-      session = JwtSession::Build.new.call(user_id: model.id)
+      session = JwtSession::Create.new.call(user_id: model.id)
       ctx['result'] = session.login
       ctx['operation_status'] = :success
     end
