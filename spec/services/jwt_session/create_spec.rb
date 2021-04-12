@@ -9,7 +9,7 @@ RSpec.describe JwtSession::Create do
     expect(result).to be_kind_of(JWTSessions::Session)
   end
 
-  it 'uses memory to store sessions' do
+  it 'uses Redis to store sessions' do
     expect(result.store.class)
       .to eq(JWTSessions::StoreAdapters::RedisStoreAdapter)
   end
