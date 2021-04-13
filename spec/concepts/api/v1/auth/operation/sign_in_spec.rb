@@ -3,9 +3,72 @@
 RSpec.describe API::V1::Auth::Operation::SignIn, type: :operation do
   subject(:result) { described_class.call(params: params) }
 
-  let(:params) { create(:user).slice(:username, :password) }
+  context 'with all params valid called' do
+    let(:params) { create(:user).slice(:username, :password) }
 
-  it 'succeeds' do
-    expect(result.success?).to equal(true)
+    it { is_expected.to be_success }
+
+    it 'includes :csrf at result' do
+      expect(result[:result]).to have_key(:csrf)
+      expect(result[:result][:csrf]).to be_a(String)
+    end
+
+    it 'includes :access token at result' do
+      expect(result[:result]).to have_key(:access)
+      expect(result[:result][:access]).to be_a(String)
+    end
+
+    it 'includes info about refresh token expiration time' do
+      expect(result[:result]).to have_key(:refresh_expires_at)
+    end
+
+    it 'includes info about access token expiration time' do
+      expect(result[:result]).to have_key(:access_expires_at)
+    end
+
+    it 'includes :refresh token at result' do
+      expect(result[:result]).to have_key(:refresh)
+      expect(result[:result][:refresh]).to be_a(String)
+    end
+  end
+
+  context 'without :username called' do
+    let(:params) { create(:user).slice(:password) }
+
+    it { is_expected.to be_failure }
+
+    it 'returns nullified result' do
+      expect(result[:result]).to be_nil
+    end
+  end
+
+  context 'without :password called' do
+    let(:params) { create(:user).slice(:username) }
+
+    it { is_expected.to be_failure }
+
+    it 'returns nullified result' do
+      expect(result[:result]).to be_nil
+    end
+  end
+
+  context 'with all params invalid valled called' do
+    let(:params) { { username: 0, password: 0 } }
+
+    it { is_expected.to be_failure }
+
+    it 'returns nullified result' do
+      expect(result[:result]).to be_nil
+    end
+  end
+
+  context 'with empty params called' do
+    let(:params) { {} }
+
+    it { is_expected.to be_failure }
+
+    it 'returns nullified result' do
+      expect(result[:result]).to be_nil
+    end
   end
 end
