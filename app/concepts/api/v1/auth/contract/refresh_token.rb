@@ -2,7 +2,7 @@
 
 module API::V1::Auth::Contract
   # Sign In  user validation rules
-  class RefreshSession < Dry::Validation::Contract
+  class RefreshToken < Dry::Validation::Contract
     params do
       required(:refresh_token).filled(:str?)
     end

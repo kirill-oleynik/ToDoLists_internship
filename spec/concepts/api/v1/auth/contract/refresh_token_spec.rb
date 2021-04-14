@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe API::V1::Auth::Contract::RefreshSession, type: :contract do
+RSpec.describe API::V1::Auth::Contract::RefreshToken, type: :contract do
   subject(:contract) { described_class.new.call(params) }
 
   context 'with all params valid called' do
