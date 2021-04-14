@@ -21,7 +21,7 @@ RSpec.describe API::V1::Auth::Operation::SignOut, type: :operation do
   context 'with invalid :refresh_token called' do
     let(:params) { { refresh_token: Faker::Lorem.sentence } }
 
-    it 'does not succeed' do
+    it 'fails' do
       expect(result['operation_status']).to equal(:failure)
     end
 
