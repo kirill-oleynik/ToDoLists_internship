@@ -25,8 +25,12 @@ RSpec.describe API::V1::Auth::Operation::SignOut, type: :operation do
       expect(result).to be_failure
     end
 
-    it 'returns expected errors' do
-      expect(result['operation_status']).to eq(:forbidden)
+    it 'returns expected error info' do
+      expect(result[:error]).to eq(JWTSessions::Errors::Unauthorized)
+    end
+
+    it 'returns expected :operation_status' do
+      expect(result[:operation_status]).to eq(:forbidden)
     end
   end
 end

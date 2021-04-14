@@ -10,6 +10,12 @@ RSpec.describe API::V1::Auth::Operation::RefreshSession, type: :operation do
     let(:params) { { refresh_token: refresh_token } }
 
     it { is_expected.to be_success }
+
+    it 'returns all expected tokens' do
+      expect(result[:model]).to have_key(:csrf)
+      expect(result[:model]).to have_key(:access)
+      expect(result[:model]).to have_key(:access_expires_at)
+    end
   end
 
   context 'without :refresh_token called' do
@@ -21,12 +27,14 @@ RSpec.describe API::V1::Auth::Operation::RefreshSession, type: :operation do
   context 'with invalid :refresh_token called' do
     let(:params) { { refresh_token: Faker::Lorem.sentence } }
 
-    it 'fails' do
-      expect(result['operation_status']).to equal(:failure)
+    it { is_expected.to be_failure }
+
+    it 'includes information about error' do
+      expect(result[:error]).to eq(JWTSessions::Errors::Unauthorized)
     end
 
-    it 'returns expected errors' do
-      expect(result['errors']).to eq('JWTSessions::Errors::Unauthorized')
+    it 'includes info about :operation_status' do
+      expect(result[:operation_status]).to eq(:forbidden)
     end
   end
 end
