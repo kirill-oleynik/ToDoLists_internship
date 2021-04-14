@@ -8,8 +8,7 @@ module API::V1::Auth::Operation
     step :sign_out
 
     def sign_out(context, params:, **)
-      session = JWTSessions::Session.new
-      session.flush_by_token(params[:refresh_token])
+      JwtSession::Destroy.new.call(params[:refresh_token])
     rescue JWTSessions::Errors::Unauthorized
       context['operation_status'] = :failure
       context['errors'] = 'JWTSessions::Errors::Unauthorized'
