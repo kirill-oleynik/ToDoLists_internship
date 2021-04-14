@@ -8,8 +8,7 @@ module API::V1::Auth::Operation
     step :refresh_session
 
     def refresh_session(context, params:, **)
-      session = JWTSessions::Session.new
-      session.refresh(params[:refresh_token])
+      JwtSession::Refresh.new.call(params[:refresh_token])
     rescue JWTSessions::Errors::Unauthorized
       context['operation_status'] = :failure
       context['errors'] = 'JWTSessions::Errors::Unauthorized'
