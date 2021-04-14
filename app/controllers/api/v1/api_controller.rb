@@ -10,7 +10,8 @@ module API
       def default_cases
         {
           success: ->(result) { result.success? },
-          invalid: ->(result) { result.failure? }
+          invalid: ->(result) { result.failure? },
+          forbidden: ->(result) { result.failure? && result[:operation_status] == :forbidden }
         }
       end
 
@@ -20,7 +21,8 @@ module API
           invalid: lambda { |result, **|
                      render json: result['contract.default'].errors, serializer: ErrorSerializer,
                             status: :unprocessable_entity
-                   }
+                   },
+          forbidden: ->(_result, **) { head(:forbidden) }
         }
       end
     end

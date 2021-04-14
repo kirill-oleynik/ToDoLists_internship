@@ -22,11 +22,11 @@ RSpec.describe API::V1::Auth::Operation::SignOut, type: :operation do
     let(:params) { { refresh_token: Faker::Lorem.sentence } }
 
     it 'fails' do
-      expect(result['operation_status']).to equal(:failure)
+      expect(result).to be_failure
     end
 
     it 'returns expected errors' do
-      expect(result['errors']).to eq('JWTSessions::Errors::Unauthorized')
+      expect(result['operation_status']).to eq(:forbidden)
     end
   end
 end
