@@ -3,11 +3,11 @@
 module API::V1::Auth::Operation
   # SignUp User operation
   class SignUp < ApplicationOperation
+    step Model(User, :new)
+    step Contract::Build(constant: API::V1::Auth::Contract::SignUp)
+    step Contract::Validate()
+    step Contract::Persist()
     step Rescue(JWTSessions::Errors::Unauthorized, handler: :internal_server_error) {
-      step Model(User, :new)
-      step Contract::Build(constant: API::V1::Auth::Contract::SignUp)
-      step Contract::Validate()
-      step Contract::Persist()
       step :generate_auth_token
     }
 
