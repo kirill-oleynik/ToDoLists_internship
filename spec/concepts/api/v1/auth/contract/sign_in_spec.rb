@@ -13,24 +13,40 @@ RSpec.describe API::V1::Auth::Contract::SignIn, type: :contract do
     let(:params) { attributes_for(:user).slice(:password) }
 
     it { is_expected.to be_failure }
+
+    it 'returns expected error message' do
+      expect(contract.errors[:username]).to include('is missing')
+    end
   end
 
   context 'with invalid :username type called' do
     let(:params) { attributes_for(:user).slice(:password).merge(username: 1) }
 
     it { is_expected.to be_failure }
+
+    it 'returns expected error message' do
+      expect(contract.errors[:username]).to include('must be a string')
+    end
   end
 
   context 'without :password' do
     let(:params) { attributes_for(:user).slice(:username) }
 
     it { is_expected.to be_failure }
+
+    it 'returns expected error message' do
+      expect(contract.errors[:password]).to include('is missing')
+    end
   end
 
   context 'with invalid :password type called' do
     let(:params) { attributes_for(:user).slice(:username).merge(password: 1) }
 
     it { is_expected.to be_failure }
+
+    it 'returns expected error message' do
+      expect(contract.errors[:password]).to include('must be a string')
+    end
   end
 
   context 'with all invalid params called' do
@@ -43,5 +59,10 @@ RSpec.describe API::V1::Auth::Contract::SignIn, type: :contract do
     let(:params) { {} }
 
     it { is_expected.to be_failure }
+
+    it 'returns expected error messages' do
+      expect(contract.errors[:password]).to include('is missing')
+      expect(contract.errors[:username]).to include('is missing')
+    end
   end
 end
