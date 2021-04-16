@@ -15,7 +15,6 @@ RSpec.describe API::V1::Auth::Contract::RefreshToken, type: :contract do
     it { is_expected.to be_failure }
 
     it 'returns expected errors' do
-      expect(contract.errors.to_hash).to have_key(:refresh_token)
       expect(contract.errors.to_hash[:refresh_token]).to include('is missing')
     end
   end
@@ -26,7 +25,6 @@ RSpec.describe API::V1::Auth::Contract::RefreshToken, type: :contract do
     it { is_expected.to be_failure }
 
     it 'returns expected errors' do
-      expect(contract.errors.to_hash).to have_key(:refresh_token)
       expect(contract.errors.to_hash[:refresh_token]).to include('is missing')
     end
   end
