@@ -71,4 +71,25 @@ RSpec.describe API::V1::Auth::Operation::SignIn, type: :operation do
       expect(result[:result]).to be_nil
     end
   end
+
+  context 'with unexisting :susername & random :password called' do
+    let(:params) do
+      {
+        username: Faker::Internet.username,
+        password: Faker::Internet.password
+      }
+    end
+
+    it 'returns nullidied result' do
+      expect(result[:result]).to be_nil
+    end
+
+    it 'returns expected :operation status' do
+      expect(result[:operation_status]).to eq(:unauthorized)
+    end
+
+    it 'reutns expected error' do
+      expect(result[:error]).to eq(ActiveRecord::RecordNotFound)
+    end
+  end
 end
