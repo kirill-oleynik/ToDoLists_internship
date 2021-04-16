@@ -1,0 +1,37 @@
+{
+  "id": "file:/auth/failure/all_params_invalid.json",
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "array",
+      "items": {
+        "minItems": 1,
+      "type": "string"
+    }
+    },
+    "email": {
+      "type": "array",
+      "items": {
+        "minItems": 1,
+      "type": "string"
+    }
+    },
+    "password": {
+      "type": "array",
+      "items": {
+        "minItems": 1,
+      "type": "string"
+    }
+    },
+    "password_confirmation": {
+      "type": "array",
+      "items": {
+        "minItems": 1,
+      "type": "string"
+    }
+    }
+  },
+  "required": ["username", "email", "password", "password_confirmation"],
+  "minProperties": 4,
+  "maxProperties": 4
+}

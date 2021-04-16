@@ -1,0 +1,16 @@
+{
+  "id": "file:/auth/failure/email_invalid.json",
+  "type": "object",
+  "minProperties": 1,
+  "maxProperties": 1,
+  "properties": {
+    "email": {
+      "type": "array",
+      "items": {
+        "minItems": 1,
+      "type": "string"
+    }
+    }
+    },
+  "required": ["email"]
+}
