@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe 'POST /v1/sign_up', type: :request do
-  before { post api_v1_sign_up_path, params: params }
+  before { post api_v1_accounts_registration_path, params: params }
 
   context 'with all params valid' do
     let(:params) { attributes_for(:user) }

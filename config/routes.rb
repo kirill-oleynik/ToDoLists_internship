@@ -3,10 +3,10 @@ Rails.application.routes.draw do
 
     namespace :api, path: '/', constaints: { subdomain: 'api' } do
       namespace :v1 do
-        post 'sgn_up', to: 'registrations#create', as: 'sign_up'
-        post 'sign_in', to: 'sessions#create', as: 'sign_in'
-        put 'refresh_session', to: 'sessions#update', as: 'update_session'
-        delete 'sign_out', to: 'sessions#destroy', as: 'sign_out'
+        namespace :accounts do
+          resource :registration, only: :create
+          resource :session, only: %i[create update destroy]
+        end
       end
     end
 end
