@@ -6,22 +6,19 @@ module API::V1::Auth::Operation
     step Model(User, :new)
     step Contract::Build(constant: API::V1::Auth::Contract::SignUp)
     step Contract::Validate()
-    # rubocop: disable Style/SignalException
-    # rubocop: disable Lint/UnreachableCode
-    fail :set_operation_failure_status
     step Contract::Persist()
-    # rubocop: enable Style/SignalException
-    # rubocop: enable Lint/UnreachableCode
-    step :generate_auth_token
+    step Rescue(JWTSessions::Errors::Unauthorized, handler: :internal_server_error) {
+      step :generate_auth_token
+    }
 
-    def set_operation_failure_status(context, **)
-      context['operation_status'] = :unprocessable_entity
+    def generate_auth_token(context, model:, **)
+      context[:result] = JwtSession::Create.new.call(user_id: model.id).login
+      context[:operation_status] = :success
     end
 
-    def generate_auth_token(ctx, model:, **)
-      session = JwtSession::Build.new.call(user_id: model.id)
-      ctx['result'] = session.login
-      ctx['operation_status'] = :success
+    def internal_server_error(exception, options)
+      options[:operation_status] = :internal_server_error
+      options[:error] = exception.class
     end
   end
 end

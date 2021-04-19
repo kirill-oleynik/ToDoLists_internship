@@ -1,0 +1,12 @@
+{
+  "id": "file:/auth/success/auth_tokens.json",
+  "type": "object",
+  "required": ["csrf", "access", "refresh", "access_expires_at", "refresh_expires_at"],
+  "properties":  {
+    "csrf": { "type": "string" },
+    "access": { "type": "string" },
+    "refresh": { "type": "string" },
+    "access_expires_at": { "type": "string" },
+    "refresh_expires_at": { "type": "string" }
+  }
+}
