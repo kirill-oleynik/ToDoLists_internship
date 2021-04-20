@@ -6,8 +6,8 @@ RSpec.describe 'POST /v1/acconts/sessions', type: :request do
   context 'with all prams valid valled' do
     let(:params) { create(:user).slice(:username, :password) }
 
-    skip 'returns :created status code' do
-      # binding.pry
+    it 'returns :created status code' do
+      expect(response).to have_http_status(:created)
     end
   end
 end

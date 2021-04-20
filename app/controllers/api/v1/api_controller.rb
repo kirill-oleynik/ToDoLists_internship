@@ -8,7 +8,7 @@ module API
       private
 
       def default_options
-        { params: params }
+        { params: params.to_unsafe_hash }
       end
 
       def default_cases
