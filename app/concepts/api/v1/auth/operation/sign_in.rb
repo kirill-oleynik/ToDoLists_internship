@@ -3,15 +3,11 @@
 module API::V1::Auth::Operation
   # SignUp User operation
   class SignIn < ApplicationOperation
-    step :call_contract
+    step Contract::Build(constant: API::V1::Auth::Contract::SignIn)
+    step Contract::Validate()
     step Rescue(ActiveRecord::RecordNotFound, handler: :set_error_info) {
       step :create_session
     }
-
-    def call_contract(context, params:, **)
-      context['contract.default'] = API::V1::Auth::Contract::SignIn.new.call(params.to_unsafe_hash)
-      context['contract.default'].success?
-    end
 
     def create_session(context, params:, **)
       user = User.find_by!(username: params[:username])

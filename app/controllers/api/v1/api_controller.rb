@@ -7,7 +7,7 @@ module API
 
       private
 
-      def default_options
+      def endpoint_options
         { params: params.to_unsafe_hash }
       end
 
