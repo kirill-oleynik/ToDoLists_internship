@@ -7,7 +7,8 @@ module API
         def default_handler
           super.merge(
             success: ->(result, **opts) { render json: result[:result], **opts, status: :created },
-            invalid: lambda do |result, **_|
+            unauthorized: ->(_result, **opts) { render json: { password: :invalid }, **opts, status: :unauthorized },
+            invalid: lambda do |result, **|
               render json: result['contract.default'].errors.messages, status: :unprocessable_entity
             end
           )

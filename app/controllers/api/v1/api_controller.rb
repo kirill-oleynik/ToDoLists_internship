@@ -13,10 +13,12 @@ module API
 
       def default_cases
         {
-          success: ->(result) { result.success? },
-          invalid: ->(result) { result.failure? },
+          unauthorized: ->(result) { result.failure? && result[:operation_status] == :unauthorized },
           forbidden: ->(result) { result.failure? && result[:operation_status] == :forbidden },
-          created: ->(result) { result.succes? && result[:operation_status] == :created }
+          not_found: ->(result) { result.failure? && result[:operation_status] == :not_found },
+          invalid: ->(result) { result.failure? },
+          created: ->(result) { result.success? && result[:operation_status] == :created },
+          success: ->(result) { result.success? }
         }
       end
 
@@ -28,6 +30,8 @@ module API
                             status: :unprocessable_entity
                    },
           forbidden: ->(_result, **) { head(:forbidden) },
+          not_found: ->(_result, **) { head(:not_found) },
+          unauthorized: ->(_result, **) { head(:unauthorized) },
           created: ->(result, **opts) { render json: result[:result], **opts, status: 201 }
         }
       end

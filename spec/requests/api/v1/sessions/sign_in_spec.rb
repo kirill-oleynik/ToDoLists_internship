@@ -15,28 +15,21 @@ RSpec.describe 'POST /v1/acconts/sessions', type: :request do
     end
   end
 
-  context ' without :username requested' do
+  context 'without :username requested' do
     let(:params) { { password: 'password' } }
 
     it 'returns :unprocessable_entity status code' do
-      expect(response).to have_http_status(:unprocessable_entity)
-    end
-
-    it 'returns expected error messages' do
-      expect(parsed_body[0]['path']).to include('username')
-      expect(parsed_body[0]['text']).to eq('is missing')
+      expect(response).to have_http_status(:not_found)
     end
   end
 
   context 'without :password requested' do
-    let(:params) do
-      create(:user)
-        .slice(:username,:password)
-        .merge(username: Faker::Internet.unique.username)
-    end
+    let!(:user) { create(:user) }
+
+    let(:params) { { username: user.username, password: 'invalidS1!!' } }
 
     it 'returns :unprocessable_entity status code' do
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unauthorized)
     end
 
     it 'returns expected error messages' do
@@ -49,14 +42,7 @@ RSpec.describe 'POST /v1/acconts/sessions', type: :request do
     let(:params) { {} }
 
     it 'returns :unprocessable_entity status code' do
-      expect(response).to have_http_status(:unprocessable_entity)
-    end
-
-    it 'returns expected error messages' do
-      expect(parsed_body[0]['path']).to include('username')
-      expect(parsed_body[1]['path']).to include('password')
-      expect(parsed_body[0]['text']).to eq('is missing')
-      expect(parsed_body[1]['text']).to eq('is missing')
+      expect(response).to have_http_status(:not_found)
     end
   end
 
@@ -66,8 +52,9 @@ RSpec.describe 'POST /v1/acconts/sessions', type: :request do
         .slice(:username, :password)
         .merge(password: 'invalid_password')
     end
+
     it 'returns :unprocessable_entity status code' do
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unauthorized)
     end
 
     it 'returns expected errors' do
@@ -75,5 +62,4 @@ RSpec.describe 'POST /v1/acconts/sessions', type: :request do
       # parsed_body != [] #false
     end
   end
-
 end
