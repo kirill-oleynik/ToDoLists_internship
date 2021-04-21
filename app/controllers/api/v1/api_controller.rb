@@ -26,8 +26,7 @@ module API
         {
           success: ->(result, **opts) { render json: result['model'], **opts, status: 200 },
           invalid: lambda { |result, **|
-                     render json: result['contract.default'], serializer: ErrorSerializer,
-                            status: :unprocessable_entity
+                     render json: result['contract.default'], serializer: ErrorSerializer, status: :unprocessable_entity
                    },
           forbidden: ->(_result, **) { head(:forbidden) },
           not_found: ->(_result, **) { head(:not_found) },

@@ -33,8 +33,7 @@ RSpec.describe 'POST /v1/acconts/sessions', type: :request do
     end
 
     it 'returns expected error messages' do
-      # binding.pry
-      # parsed_body != [] #false
+      expect(parsed_body['password']).to include('invalid')
     end
   end
 
@@ -58,8 +57,7 @@ RSpec.describe 'POST /v1/acconts/sessions', type: :request do
     end
 
     it 'returns expected errors' do
-      # binding.pry
-      # parsed_body != [] #false
+      expect(parsed_body['password']).to include('invalid')
     end
   end
 end
