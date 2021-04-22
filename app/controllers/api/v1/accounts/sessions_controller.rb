@@ -8,6 +8,10 @@ module API
           endpoint operation: API::V1::Auth::Operation::SignIn
         end
 
+        def update
+          endpoint operation: API::V1::Auth::Operation::RefreshSession
+        end
+
         def destroy
           endpoint operation: API::V1::Auth::Operation::SignOut,
                    different_handler: destroy_handler
