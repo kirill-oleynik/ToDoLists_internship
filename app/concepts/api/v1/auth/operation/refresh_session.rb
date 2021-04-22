@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module API::V1::Auth::Operation
-  # SignUp User operation
+  # refresh session operation
   class RefreshSession < ApplicationOperation
     step :call_contract
     step Rescue(JWTSessions::Errors::Unauthorized, handler: :render_status) {
