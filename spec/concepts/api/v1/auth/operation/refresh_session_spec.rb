@@ -3,11 +3,8 @@
 RSpec.describe API::V1::Auth::Operation::RefreshSession, type: :operation do
   subject(:result) { described_class.call(params: params) }
 
-  let(:user) { create(:user) }
-  let(:refresh_token) { JwtSession::Create.new.call(user_id: user.id).login[:refresh] }
-
   context 'with all params valid called' do
-    let(:params) { { refresh_token: refresh_token } }
+    let(:params) { { refresh_token: new_user_auth_tokens[:refresh] } }
 
     it { is_expected.to be_success }
 
