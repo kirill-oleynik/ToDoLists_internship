@@ -10,7 +10,10 @@ module API::V1::Auth::Operation
     fail :set_error_info
     step :create_session
 
-    def call_contract(context, params:, **); end
+    def call_contract(context, params:, **)
+      context['contract.default'] = API::V1::Auth::Contract::SignIn.new.call(params)
+      context['contract.default'].success?
+    end
 
     def find_user(context, params:, **)
       context[:user] = User.find_by(username: params[:username])
