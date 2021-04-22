@@ -4,7 +4,7 @@ RSpec.describe API::V1::Auth::Operation::SignOut, type: :operation do
   subject(:result) { described_class.call(params: params) }
 
   let(:user) { create(:user) }
-  let(:refresh_token) { JwtSession::Create.new.call(user_id: user.id).login[:refresh] }
+  let(:refresh_token) { new_user_auth_tokens[:refresh] }
 
   context 'with all params valid called' do
     let(:params) { { refresh_token: refresh_token } }
@@ -25,12 +25,8 @@ RSpec.describe API::V1::Auth::Operation::SignOut, type: :operation do
       expect(result).to be_failure
     end
 
-    it 'returns expected error info' do
-      expect(result[:error]).to eq(JWTSessions::Errors::Unauthorized)
-    end
-
     it 'returns expected :operation_status' do
-      expect(result[:operation_status]).to eq(:forbidden)
+      expect(result[:operation_status]).to eq(:unprocessable_entity)
     end
   end
 end

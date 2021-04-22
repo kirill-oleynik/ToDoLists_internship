@@ -7,6 +7,19 @@ module API
         def create
           endpoint operation: API::V1::Auth::Operation::SignIn
         end
+
+        def destroy
+          endpoint operation: API::V1::Auth::Operation::SignOut,
+                   different_handler: destroy_handler
+        end
+
+        private
+
+        def destroy_handler
+          {
+            success: ->(result, **opts) { render json: result[:result], **opts, status: :ok }
+          }
+        end
       end
     end
   end

@@ -3,11 +3,15 @@
 module API::V1::Auth::Operation
   # SignUp User operation
   class SignOut < ApplicationOperation
-    step Contract::Build(constant: API::V1::Auth::Contract::RefreshToken)
-    step Contract::Validate()
+    step :call_contract
     step Rescue(JWTSessions::Errors::Unauthorized, handler: :set_error_info) {
       step :sign_out
     }
+
+    def call_contract(context,params:,**)
+      context['contract.default'] = API::V1::Auth::Contract::RefreshToken.new.call(params)
+      context['contract.default'].success?
+    end
 
     def sign_out(context, params:, **)
       context[:model] = JwtSession::Destroy.new.call(params[:refresh_token])
