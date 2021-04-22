@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# esdf
+
 RSpec.describe 'DELETE /v1/accounts/session', type: :request do
   before { delete(api_v1_accounts_session_path, params: params) }
 
@@ -10,7 +12,7 @@ RSpec.describe 'DELETE /v1/accounts/session', type: :request do
       expect(response).to have_http_status(:ok)
     end
 
-    it 'has no any response body' do
+    it 'returs nullified response body' do
       expect(parsed_body).to be_nil
     end
   end
@@ -18,25 +20,24 @@ RSpec.describe 'DELETE /v1/accounts/session', type: :request do
   context 'with invalid refresh token requested' do
     let(:params) { { refresh_token: Faker::Lorem.sentence } }
 
-    it 'returns 422 status code' do
-      expect(response).to have_http_status(:unprocessable_entity)
+    it 'returns 403 status code' do
+      expect(response).to have_http_status(:forbidden)
     end
 
     it 'has no any response body' do
-      expect(parsed_body).to be_empty
+      expect(response.body).to be_empty
     end
   end
 
   context 'without refresh_token requested' do
     let(:params) { { foo: 'bar' } }
 
-    it 'returns 422 status code' do
-      expect(response).to have_http_status(:unprocessable_entity)
+    it 'returns 403 status code' do
+      expect(response).to have_http_status(:forbidden)
     end
 
-    it 'returns expected error messages' do
-      expect(parsed_body[0]['path']).to include('refresh_token')
-      expect(parsed_body[0]['text']).to include('is missing')
+    it 'has no any response body' do
+      expect(response.body).to be_empty
     end
   end
 end
