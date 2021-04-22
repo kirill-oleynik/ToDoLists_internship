@@ -84,12 +84,8 @@ RSpec.describe API::V1::Auth::Operation::SignIn, type: :operation do
       expect(result[:result]).to be_nil
     end
 
-    it 'returns expected :operation status' do
-      expect(result[:operation_status]).to eq(:unauthorized)
-    end
-
-    it 'reutns expected error' do
-      expect(result[:error]).to eq(ActiveRecord::RecordNotFound)
+    it 'returns expected :operation_status' do
+      expect(result[:operation_status]).to eq(:not_found)
     end
   end
 end

@@ -1,21 +1,24 @@
 # frozen_string_literal: true
 
 module API::V1::Auth::Operation
-  # SignUp User operation
+  # SignOut User operation
   class SignOut < ApplicationOperation
-    step Contract::Build(constant: API::V1::Auth::Contract::RefreshToken)
-    step Contract::Validate()
-    step Rescue(JWTSessions::Errors::Unauthorized, handler: :set_error_info) {
-      step :sign_out
+    step :call_contract
+    step Rescue(JWTSessions::Errors::Unauthorized, handler: :render_status) {
+      step :refresh_session
     }
 
-    def sign_out(context, params:, **)
-      context[:model] = JwtSession::Destroy.new.call(params[:refresh_token])
+    def call_contract(context, params:, **)
+      context['contract.default'] = API::V1::Auth::Contract::RefreshToken.new.call(params)
     end
 
-    def set_error_info(exception, options)
-      options[:operation_status] = :forbidden
+    def refresh_session(context, params:, **)
+      context[:model] = JwtSession::Refresh.new.call(params[:refresh_token])
+    end
+
+    def render_status(exception, options)
       options[:error] = exception.class
+      options[:operation_status] = :forbidden
     end
   end
 end

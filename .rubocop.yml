@@ -34,3 +34,15 @@ RSpec/ExampleLength:
   Max: 6
 RSpec/MultipleExpectations:
   Max: 6
+Lint/UnreachableCode:
+  Enabled: true
+  Exclude:
+        - 'app/concepts/api/v1/auth/operation/sign_in.rb'
+Metrics/AbcSize:
+  Enabled: true
+  Exclude:
+      - 'app/controllers/api/v1/api_controller.rb'
+Style/SignalException:
+  Enabled: true
+  Exclude:
+        - 'app/concepts/api/v1/auth/operation/sign_in.rb'
