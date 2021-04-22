@@ -8,7 +8,7 @@ module API::V1::Auth::Operation
       step :sign_out
     }
 
-    def call_contract(context,params:,**)
+    def call_contract(context, params:, **)
       context['contract.default'] = API::V1::Auth::Contract::RefreshToken.new.call(params)
       context['contract.default'].success?
     end

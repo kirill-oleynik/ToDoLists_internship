@@ -10,12 +10,9 @@ module API::V1::Auth::Operation
     fail :set_error_info
     step :create_session
 
-    def call_contract(context, params:, **)
-      binding.pry
-    end
+    def call_contract(context, params:, **); end
 
     def find_user(context, params:, **)
-      binding.pry
       context[:user] = User.find_by(username: params[:username])
     end
 

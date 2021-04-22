@@ -29,6 +29,7 @@ RSpec.describe 'DELETE /v1/accounts/session', type: :request do
 
   context 'without refresh_token requested' do
     let(:params) { { foo: 'bar' } }
+
     it 'returns 422 status code' do
       expect(response).to have_http_status(:unprocessable_entity)
     end
