@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module API::V1::Auth::Operation
-  # SignUp User operation
+  # SignIn User operation
   class SignIn < ApplicationOperation
     step :call_contract
     step :find_user
@@ -11,11 +11,11 @@ module API::V1::Auth::Operation
     step :create_session
 
     def call_contract(context, params:, **)
-      context['contract.default'] = API::V1::Auth::Contract::SignIn.new.call(params)
-      context['contract.default'].success?
+      binding.pry
     end
 
     def find_user(context, params:, **)
+      binding.pry
       context[:user] = User.find_by(username: params[:username])
     end
 
