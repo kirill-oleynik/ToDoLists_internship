@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe API::V1::Auth::Operation::SignOut, type: :operation do
-  subject(:result) { described_class.call(params: params) }
+  subject(:result) { described_class.call(params: params, options: { foo: 'bar' }) }
 
   let(:user) { create(:user) }
   let(:refresh_token) { new_user_auth_tokens[:refresh] }

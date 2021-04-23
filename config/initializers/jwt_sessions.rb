@@ -10,3 +10,4 @@ JWTSessions.algorithm = 'HS256'
 JWTSessions.encryption_key = Rails.application.credentials.secret_key_base
 JWTSessions.access_exp_time = 1.hour
 JWTSessions.refresh_exp_time = 24.hours
+JWTSessions.refresh_header = "X-Refresh-Token"
