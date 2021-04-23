@@ -36,6 +36,7 @@ group :development, :test do
   gem 'rubocop', '~> 1.9', '>= 1.9.1'
   gem 'rubocop-performance', '~> 1.9', '>= 1.9.2'
   gem 'rubocop-rails', '~> 2.9', '>= 2.9.1'
+  gem 'sidekiq', '~> 6.2', '>= 6.2.1'
 end
 
 group :test do
