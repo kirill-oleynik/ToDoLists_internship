@@ -4,7 +4,8 @@ module API::V1::Auth::Operation
   # refresh session operation
   class RefreshSession < ApplicationOperation
     step :call_contract
-    step Rescue(JWTSessions::Errors::Unauthorized, handler: :render_status) {
+    step Rescue(JWTSessions::Errors::Unauthorized, handler: :set_operation_status) {
+      step :create_payload
       step :refresh_session
     }
 
@@ -12,11 +13,18 @@ module API::V1::Auth::Operation
       context['contract.default'] = API::V1::Auth::Contract::RefreshToken.new.call(params)
     end
 
-    def refresh_session(context, params:, **)
-      context[:model] = JwtSession::Refresh.new.call(params[:refresh_token])
+    def create_payload(context, params:, **)
+      user_id = JWTSessions::Token.decode(params[:refresh_token]).first['user_id']
+      return unless User.exists?(user_id)
+
+      context[:payload] = { user_id: user_id }
     end
 
-    def render_status(exception, options)
+    def refresh_session(context, payload:, params:, **)
+      context[:model] = JwtSession::Refresh.new(payload: payload).call(params[:refresh_token])
+    end
+
+    def set_operation_status(exception, options)
       options[:error] = exception.class
       options[:operation_status] = :forbidden
     end

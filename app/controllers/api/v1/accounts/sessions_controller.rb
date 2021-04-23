@@ -11,7 +11,7 @@ module API
         end
 
         def update
-          endpoint operation: API::V1::Auth::Operation::RefreshSession
+          endpoint operation: API::V1::Auth::Operation::RefreshSession, options: refresh_token
         end
 
         def destroy

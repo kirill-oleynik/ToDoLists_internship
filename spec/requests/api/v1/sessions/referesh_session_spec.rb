@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 RSpec.describe 'PUT /v1/accounts/session', type: :request do
-  before { put(api_v1_accounts_session_path, params: params) }
+  before { put api_v1_accounts_session_path, headers: headers, as: :json }
 
-  context 'with all params valid requested' do
-    let(:params) { { refresh_token: new_user_auth_tokens[:refresh] } }
+  let(:headers) { { 'X-Refresh-Token': refresh_token } }
 
-    it 'returns 200 status code' do
+  context 'with valid refresh token requested' do
+    let(:refresh_token) { new_user_auth_tokens[:refresh] }
+
+    it 'returns 201 status code' do
       expect(response).to have_http_status(:created)
     end
 
@@ -16,26 +18,26 @@ RSpec.describe 'PUT /v1/accounts/session', type: :request do
   end
 
   context 'with invalid refresh token requested' do
-    let(:params) { { refresh_token: Faker::Lorem.sentence } }
+    let(:refresh_token) { Faker::Lorem.sentence }
 
-    it 'returns 422 status code' do
-      expect(response).to have_http_status(:forbidden)
+    it 'returns 401 status code' do
+      expect(response).to have_http_status(:unauthorized)
     end
 
-    it 'has no any response body' do
-      expect(response.body).to be_empty
+    it 'returns Not authorized error message' do
+      expect(parsed_body['error']).to eq('Not authorized')
     end
   end
 
   context 'without refresh_token requested' do
-    let(:params) { { foo: 'bar' } }
+    let(:refresh_token) { nil }
 
-    it 'returns 422 status code' do
-      expect(response).to have_http_status(:forbidden)
+    it 'returns 401 status code' do
+      expect(response).to have_http_status(:unauthorized)
     end
 
-    it 'has no any response body' do
-      expect(response.body).to be_empty
+    it 'returns Not authorized error message' do
+      expect(parsed_body['error']).to eq('Not authorized')
     end
   end
 end
