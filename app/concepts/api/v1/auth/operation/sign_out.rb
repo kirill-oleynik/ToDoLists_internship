@@ -8,12 +8,12 @@ module API::V1::Auth::Operation
       step :refresh_session
     }
 
-    def call_contract(context, params:, **)
-      context['contract.default'] = API::V1::Auth::Contract::RefreshToken.new.call(params)
+    def call_contract(context, **)
+      context['contract.default'] = API::V1::Auth::Contract::RefreshToken.new.call(context)
     end
 
-    def refresh_session(context, params:, **)
-      context[:model] = JwtSession::Refresh.new.call(params[:refresh_token])
+    def refresh_session(context, **)
+      context[:model] = JwtSession::Refresh.new.call(context[:params][:refresh_token])
     end
 
     def render_status(exception, options)

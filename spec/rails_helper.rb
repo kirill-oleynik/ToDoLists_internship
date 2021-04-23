@@ -23,6 +23,7 @@ RSpec.configure do |config|
   config.include Requests::JsonHelpers, type: :request
   config.include Requests::AuthHelpers, type: :request
   config.include Requests::AuthHelpers, type: :operation
+  config.include Requests::AuthHelpers, type: :service
   config.include GraphQL::RequestHelpers, type: :request
   config.include GraphQL::MutationHelpers, type: :request
   config.use_transactional_fixtures = true
