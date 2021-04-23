@@ -3,8 +3,9 @@
 module JwtSession
   # Responsible for refreshing user session
   class Refresh
-    def initialize(session: JWTSessions::Session.new)
-      @session = session
+    def initialize(session_class: JWTSessions::Session, payload: {})
+      @payload = payload
+      @session = session_class.new(payload)
     end
 
     def call(refresh_token)
