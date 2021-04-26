@@ -1,32 +1,15 @@
 # frozen_string_literal: true
 
 RSpec.describe User, type: :model do
-  subject(:user) { create(:user, username: 'username', email: 'email') }
+  describe 'associations' do
+    it { is_expected.to have_many(:tasks) }
 
-  describe 'Instance methods' do
-    describe 'getters' do
-      it '#username' do
-        expect(user.username).to eq('username')
-      end
-
-      it '#email' do
-        expect(user.email).to eq('email')
-      end
-    end
-
-    describe 'setters' do
-      before do
-        user.username = 'username-2'
-        user.email = 'email-2'
-      end
-
-      it '#username' do
-        expect(user.username).to eq('username-2')
-      end
-
-      it '#email' do
-        expect(user.email).to eq('email-2')
-      end
+    it 'destroys dependent tasks after deletion' do
+      expect(Task.count).to equal(0)
+      user = create_user_with_tasks(tasks_count: 10)
+      expect(Task.count).to equal(10)
+      user.destroy
+      expect(Task.count).to equal(0)
     end
   end
 end
