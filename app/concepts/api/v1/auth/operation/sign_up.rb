@@ -7,6 +7,7 @@ module API::V1::Auth::Operation
     step Contract::Build(constant: API::V1::Auth::Contract::SignUp)
     step Contract::Validate()
     step Contract::Persist()
+    step :send_sign_up_confirmation
     step Rescue(JWTSessions::Errors::Unauthorized, handler: :internal_server_error) {
       step :generate_auth_token
     }
@@ -14,6 +15,10 @@ module API::V1::Auth::Operation
     def generate_auth_token(context, model:, **)
       context[:result] = JwtSession::Create.new.call(user_id: model.id).login
       context[:operation_status] = :success
+    end
+
+    def send_sign_up_confirmation(_context, model:, **)
+      UserMailer.cignup_confirmation(model).deliver_later
     end
 
     def internal_server_error(exception, options)
