@@ -7,10 +7,6 @@ module API
 
       private
 
-      def endpoint_options
-        { params: params.to_unsafe_hash }
-      end
-
       def default_cases
         {
           unauthorized: ->(result) { result.failure? && result[:operation_status] == :unauthorized },
