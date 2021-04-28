@@ -7,6 +7,7 @@ Rails.application.routes.draw do
           resource :registration, only: :create
           resource :session, only: %i[create update destroy]
         end
+        resources :tasks
       end
     end
 end
