@@ -38,6 +38,7 @@ Lint/UnreachableCode:
   Enabled: true
   Exclude:
         - 'app/concepts/api/v1/auth/operation/sign_in.rb'
+        - 'app/concepts/api/v1/tasks/operation/create.rb'
 Metrics/AbcSize:
   Enabled: true
   Exclude:
@@ -46,3 +47,4 @@ Style/SignalException:
   Enabled: true
   Exclude:
         - 'app/concepts/api/v1/auth/operation/sign_in.rb'
+        - 'app/concepts/api/v1/tasks/operation/create.rb'
