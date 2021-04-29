@@ -1,0 +1,13 @@
+{
+  "id": "file:/entities/task.json",
+  "type": "object",
+  "required": ["id", "user_id", "title", "done", "deadline", "created_at", "updated_at"],
+  "properties":  {
+    "csrf": { "id": "string" },
+    "access": { "user_id": "string" },
+    "refresh": { "done": "string" },
+    "deadline": { "deadline": "string" },
+    "created_at": { "type": "string" },
+    "updated_at": { "type": "string" }
+  }
+}
