@@ -5,24 +5,27 @@ module API::V1::Tasks::Operation
   class Create < ApplicationOperation
     step :call_contract
     step :find_user
-    fail :set_not_found_operation_status, fial_fast: true
+    fail :set_unauthorized_status, fial_fast: true
     step :create_task
 
     def call_contract(context, params:, **)
-      context['contract.default'] = API::V1::Tasks::Contract::Create.new.call(params)
+      context['contract.default'] = API::V1::Tasks::Contract::Create.new.call(params[:task])
       context['contract.default'].success?
     end
 
-    def find_user(context, params:, **)
-      context[:user] = User.find_by(id: params[:user_id])
+    def find_user(context, token:, **)
+      user_id = JWTSessions::Token.decode(token)[0]['user_id']
+      context[:user] = User.find_by(id: user_id)
+    rescue JWTSessions::Errors::Unauthorized
+      false
     end
 
-    def set_not_found_operation_status(context, **)
-      context[:operation_status] = :unprocessable_entity
+    def set_unauthorized_status(context, **)
+      context[:operation_status] = :unauthorized
     end
 
-    def create_task(context, params:, **)
-      context['model'] = Task.create(params)
+    def create_task(context, params:, user:, **)
+      context['model'] = user.tasks.create(params[:task])
     end
   end
 end

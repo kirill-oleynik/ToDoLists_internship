@@ -1,26 +1,46 @@
 # frozen_string_literal: true
 
 RSpec.describe API::V1::Tasks::Operation::Create, type: :operation do
-  subject(:result) { described_class.call(params: params) }
+  subject(:result) { described_class.call(token: token, params: params) }
 
-  context 'with all params valid called' do
-    let(:params) { attributes_for(:task) }
+  before { result }
+
+  context 'with all params valid valled' do
+    let(:params) { { params: attributes_for(:task) } }
+    let(:token) { new_user_auth_tokens[:access] }
 
     it { is_expected.to be_success }
 
-    it 'returns created task as a model' do
-      expect(result['model'].title).to eq(params[:title])
-      expect(result['model'].user.id).to eq(params[:user_id])
+    it 'creates right task for right user' do
+      user = User.find(JWTSessions::Token.decode(token)[0]['user_id'])
+      expect(user.tasks.count).to equal(1)
+      expect(user.tasks.first.title).to eq(params[:title])
     end
   end
 
-  context 'with unexisting :user_id called' do
-    let(:params) { attributes_for(:task).merge(user_id: SecureRandom.uuid) }
+  context 'without token called' do
+    let(:params) { attributes_for(:task) }
+    let(:token) { nil }
 
-    it { is_expected.not_to be_success }
+    it { is_expected.to be_failure }
 
-    it 'has operation_status: :unprocessable_entity' do
-      expect(result[:operation_status]).to eq(:unprocessable_entity)
+    it 'returns :unauthorized :status_code' do
+      expect(result[:operation_status]).to eq(:unauthorized)
+    end
+  end
+
+  context 'with empty params called' do
+    let(:token) { new_user_auth_tokens[:access] }
+    let(:params) { {} }
+
+    it { is_expected.to be_success }
+
+    it 'creates empty task for expected user' do
+      user = User.find(JWTSessions::Token.decode(token)[0]['user_id'])
+      expect(user.tasks.count).to equal(1)
+      expect(user.tasks.first.title).to eq(nil)
+      expect(user.tasks.first.done).to eq(nil)
+      expect(user.tasks.first.deadline).to eq(nil)
     end
   end
 end
