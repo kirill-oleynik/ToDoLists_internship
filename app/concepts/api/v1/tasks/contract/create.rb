@@ -4,7 +4,6 @@ module API::V1::Tasks::Contract
   # Create task entity validation rules
   class Create < Dry::Validation::Contract
     params do
-      required(:user_id).filled(:str?)
       optional(:title).filled(:str?)
       optional(:done).filled(:bool?)
       optional(:deadline).filled(:str?)

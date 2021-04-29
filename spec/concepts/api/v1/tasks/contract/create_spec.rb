@@ -9,16 +9,6 @@ RSpec.describe API::V1::Tasks::Contract::Create, type: :contract do
     it { is_expected.to be_success }
   end
 
-  context 'without user_id called' do
-    let(:params) { attributes_for(:task).delete_if { |k, _| k == :user_id } }
-
-    it { is_expected.not_to be_success }
-
-    it 'returns expected error' do
-      expect(contract.errors.to_hash[:user_id]).to include('is missing')
-    end
-  end
-
   context 'without :title called' do
     let(:params) { attributes_for(:task).delete_if { |k, _| k == :title } }
 
@@ -35,16 +25,6 @@ RSpec.describe API::V1::Tasks::Contract::Create, type: :contract do
     let(:params) { attributes_for(:task).delete_if { |k, _| k == :deadline } }
 
     it { is_expected.to be_success }
-  end
-
-  context 'with invalid :user_id data type called' do
-    let(:params) { attributes_for(:task).merge(user_id: true) }
-
-    it { is_expected.not_to be_success }
-
-    it 'returns expected error' do
-      expect(contract.errors.to_hash[:user_id]).to include('must be a string')
-    end
   end
 
   context 'with invalid :title data type called' do
@@ -90,10 +70,6 @@ RSpec.describe API::V1::Tasks::Contract::Create, type: :contract do
   context 'without all the arguments called' do
     let(:params) { {} }
 
-    it { is_expected.not_to be_success }
-
-    it 'returns expected errors' do
-      expect(contract.errors.to_hash[:user_id]).to include('is missing')
-    end
+    it { is_expected.to be_success }
   end
 end
