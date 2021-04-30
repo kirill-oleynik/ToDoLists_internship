@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 module API::V1::Tasks::Operation
-  # Create Task entity operation
-  class Create < ApplicationOperation
+  # Show Task entity operation
+  class Show < ApplicationOperation
     step :call_contract
     step :find_user
     fail :set_unauthorized_status, fail_fast: true
     step :create_task
 
     def call_contract(context, params:, **)
-      context['contract.default'] = API::V1::Tasks::Contract::Create.new.call(params[:task])
+      context['contract.default'] = API::V1::Tasks::Contract::Show.new.call(params)
       context['contract.default'].success?
     end
 
@@ -25,7 +25,10 @@ module API::V1::Tasks::Operation
     end
 
     def create_task(context, params:, user:, **)
-      context['model'] = user.tasks.create(params[:task])
+      context['model'] = user.tasks.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      context[:operation_status] = :not_found
+      false
     end
   end
 end
