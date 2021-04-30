@@ -10,6 +10,10 @@ module API
                  different_handler: create_task_handler
       end
 
+      def show
+        endpoint operation: API::V1::Tasks::Operation::Show, options: { token: found_token }
+      end
+
       private
 
       def create_task_handler
