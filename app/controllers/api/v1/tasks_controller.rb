@@ -5,13 +5,17 @@ module API
     class TasksController < APIController
       before_action :authorize_access_request!
 
-      def create
-        endpoint operation: API::V1::Tasks::Operation::Create, options: { token: found_token },
-                 different_handler: create_task_handler
+      def index
+        endpoint operation: API::V1::Tasks::Operation::Index, options: { token: found_token }
       end
 
       def show
         endpoint operation: API::V1::Tasks::Operation::Show, options: { token: found_token }
+      end
+
+      def create
+        endpoint operation: API::V1::Tasks::Operation::Create, options: { token: found_token },
+                 different_handler: create_task_handler
       end
 
       private

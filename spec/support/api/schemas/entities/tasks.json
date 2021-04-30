@@ -1,0 +1,15 @@
+{
+  "id": "file:/entities/tasks.json",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id","user_id","title","done","deadline"],
+    "properties": {
+      "id": { "type": "string" },
+      "user_id": { "type": "string" },
+      "title": { "type": "string" },
+      "done": { "type": "boolean" },
+      "deadline": { "type": "string" }
+    }
+  }
+}

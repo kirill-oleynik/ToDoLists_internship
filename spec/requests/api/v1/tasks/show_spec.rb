@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'GET /v1/tasks/:id', type: :request do
+RSpec.describe 'GET /v1/task/:id', type: :request do
   before { get api_v1_task_path(task_id), headers: headers, as: :json }
 
   let(:task) { create(:task) }
@@ -8,7 +8,6 @@ RSpec.describe 'GET /v1/tasks/:id', type: :request do
   let(:headers) { { 'Authorization': access_token } }
 
   context 'with all params & header valid requested' do
-    # let(:task) { create(:task) }
     let(:task_id) { task.id }
     let(:user_id) { task.user_id }
     let(:access_token) { JwtSession::Create.new.call(user_id: user_id).login[:access] }
