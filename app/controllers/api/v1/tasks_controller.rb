@@ -18,6 +18,10 @@ module API
                  different_handler: create_task_handler
       end
 
+      def destroy
+        endpoint operation: API::V1::Tasks::Operation::Delete, options: { token: found_token }
+      end
+
       private
 
       def create_task_handler
