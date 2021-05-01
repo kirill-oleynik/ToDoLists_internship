@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'PUT /v1/tasks', type: :request do
+RSpec.describe 'POST /v1/tasks', type: :request do
   before { post api_v1_tasks_path, headers: headers, params: params, as: :json }
 
   let(:headers) { { 'Authorization': access_token } }
