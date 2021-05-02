@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
-require 'date'
-
 FactoryBot.define do
   factory :task do |f|
     f.title { Faker::Lorem.sentence }
     f.done { Faker::Boolean.boolean(true_ratio: 0.5) }
     f.deadline { (Date.today + rand(100)).to_s }
     f.user_id { create(:user).id }
+  end
+end
+
+def create_task_with_comments(comments_count: 5)
+  FactoryBot.create(:task) do |task|
+    FactoryBot.create_list(:comment, comments_count, task_id: task.id)
   end
 end
