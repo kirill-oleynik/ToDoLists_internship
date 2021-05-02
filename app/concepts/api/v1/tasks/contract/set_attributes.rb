@@ -2,7 +2,7 @@
 
 module API::V1::Tasks::Contract
   # Create task entity validation rules
-  class Update < Dry::Validation::Contract
+  class SetAttributes < Dry::Validation::Contract
     params do
       optional(:title).filled(:str?)
       optional(:done).filled(:bool?)

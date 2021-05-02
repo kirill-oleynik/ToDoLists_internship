@@ -8,7 +8,7 @@ module API::V1::Tasks::Operation
     step :update_task
 
     def call_contract(context, params:, **)
-      context['contract.default'] = API::V1::Tasks::Contract::Update.new.call(params[:task])
+      context['contract.default'] = API::V1::Tasks::Contract::SetAttributes.new.call(params[:task])
       context['contract.default'].success?
     end
 
