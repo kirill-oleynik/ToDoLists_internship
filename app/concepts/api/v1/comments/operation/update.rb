@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module API::V1::Comments::Operation
-  # Create Task Comment entity operation
+  # Update Task Comment entity operation
   class Update < ApplicationOperation
     step :call_contract
     step :find_user
