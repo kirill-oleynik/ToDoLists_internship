@@ -14,6 +14,10 @@ module API
         endpoint operation: API::V1::Comments::Operation::Update, options: { token: found_token }
       end
 
+      def destroy
+        endpoint operation: API::V1::Comments::Operation::Delete, options: { token: found_token }
+      end
+
       private
 
       def create_comment_handler
