@@ -1,0 +1,12 @@
+{
+  "id": "file:/entities/comment.json",
+  "type": "object",
+  "required": ["id", "task_id", "title", "created_at", "updated_at"],
+  "properties":  {
+    "id": { "type": "string" },
+    "task_id": { "type": "string" },
+    "title": { "type": "string" },
+    "created_at": { "type": "string" },
+    "updated_at": { "type": "string" }
+  }
+}
