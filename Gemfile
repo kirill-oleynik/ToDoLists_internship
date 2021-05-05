@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.1'
 
+gem 'aws-sdk-s3', '~> 1.94', '>= 1.94.1'
 # Trailblazer bundle
 gem 'bcrypt', '~> 3.1.7'
 gem 'graphql', '~> 1.12', '>= 1.12.5'
@@ -36,6 +37,7 @@ group :development, :test do
   gem 'rubocop', '~> 1.9', '>= 1.9.1'
   gem 'rubocop-performance', '~> 1.9', '>= 1.9.2'
   gem 'rubocop-rails', '~> 2.9', '>= 2.9.1'
+  gem 'shrine', '~> 3.3'
   gem 'sidekiq', '~> 6.2', '>= 6.2.1'
 end
 
