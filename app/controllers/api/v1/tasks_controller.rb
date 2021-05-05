@@ -15,7 +15,8 @@ module API
 
       def create
         endpoint operation: API::V1::Tasks::Operation::Create, options: { token: found_token },
-                 different_handler: create_task_handler
+                 different_handler: create_task_handler,
+                 renderer_options: { serializer: TaskSerializer }
       end
 
       def update

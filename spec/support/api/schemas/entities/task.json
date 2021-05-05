@@ -8,6 +8,14 @@
     "refresh": { "done": "string" },
     "deadline": { "deadline": "string" },
     "created_at": { "type": "string" },
-    "updated_at": { "type": "string" }
+    "updated_at": { "type": "string" },
+    "relationships": {
+      "type": "object",
+      "properties": {
+        "comments": {
+          "type": "object"
+        }
+      }
+    }
   }
 }
