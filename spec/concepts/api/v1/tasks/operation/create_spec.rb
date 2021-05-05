@@ -12,7 +12,7 @@ RSpec.describe API::V1::Tasks::Operation::Create, type: :operation do
     it { is_expected.to be_success }
 
     it 'creates right task for right user' do
-      user = User.find(JWTSessions::Token.decode(token)[0]['user_id'])
+      user = User.find(JwtSession::GetUserIdFromToken.new(token).call)
       expect(user.tasks.count).to equal(1)
       expect(user.tasks.first.title).to eq(params[:title])
     end
@@ -36,7 +36,7 @@ RSpec.describe API::V1::Tasks::Operation::Create, type: :operation do
     it { is_expected.to be_success }
 
     it 'creates empty task for expected user' do
-      user = User.find(JWTSessions::Token.decode(token)[0]['user_id'])
+      user = User.find(JwtSession::GetUserIdFromToken.new(token).call)
       expect(user.tasks.count).to equal(1)
       expect(user.tasks.first.title).to eq(nil)
       expect(user.tasks.first.done).to eq(nil)

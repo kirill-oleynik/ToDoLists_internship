@@ -14,7 +14,7 @@ module API::V1::Tasks::Operation
     end
 
     def find_user(context, token:, **)
-      user_id = JWTSessions::Token.decode(token)[0]['user_id']
+      user_id = JwtSession::GetUserIdFromToken.new(token).call
       context[:user] = User.find_by(id: user_id)
     rescue JWTSessions::Errors::Unauthorized
       false
