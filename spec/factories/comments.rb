@@ -3,6 +3,9 @@
 FactoryBot.define do
   factory :comment do |f|
     f.title { Faker::Lorem.sentence }
-    f.task_id { create(:task).id }
+    task
+    trait :having_attachment do
+      image { Rack::Test::UploadedFile.new('spec/fixtures/files/image.png') }
+    end
   end
 end
