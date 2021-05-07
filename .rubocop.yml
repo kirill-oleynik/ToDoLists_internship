@@ -15,6 +15,7 @@ Style/Documentation:
   Exclude:
         - 'app/models/application_record.rb'
         - 'app/controllers/**/*'
+        - 'app/uploaders/*.rb'
 RSpec/MultipleExpectations:
   Enabled: true
   Max: 3

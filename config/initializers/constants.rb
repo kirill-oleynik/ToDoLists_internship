@@ -12,4 +12,9 @@ module Constants
     MAX_DEPTH: 10
   }.freeze
   end
+  module Uploads
+    FILE_SIZE_RANGE = (1..10.megabytes).freeze
+    FILE_MIME_TYPES = %w[image/jpeg image/png].freeze
+    FILE_EXTENTIONS = %w[jpg jpeg png].freeze
+  end
 end
