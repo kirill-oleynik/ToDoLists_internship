@@ -5,4 +5,7 @@ class CommentSerializer
   attributes :id,
              :title
   belongs_to :task
+  attribute :image do |comment|
+    comment.image&.url
+  end
 end

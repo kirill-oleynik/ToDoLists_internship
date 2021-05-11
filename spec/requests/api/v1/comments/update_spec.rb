@@ -40,4 +40,16 @@ RSpec.describe 'PUT    /v1/tasks/:task_id/comments/:id', type: :request do
       expect(response).to have_http_status(:not_found)
     end
   end
+
+  context 'when comment has valid attached image (file upload)' do
+    let(:comment) { create(:comment, :with_valid_attachment, task: task) }
+
+    it 'returns response with status code 200' do
+      expect(response).to have_http_status(:ok)
+    end
+
+    it 'returns serialized comment' do
+      expect(response).to match_json_schema('entities/comment')
+    end
+  end
 end

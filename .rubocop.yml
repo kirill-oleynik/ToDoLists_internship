@@ -16,6 +16,7 @@ Style/Documentation:
         - 'app/models/application_record.rb'
         - 'app/controllers/**/*'
         - 'app/uploaders/*.rb'
+        - 'app/serializers/*.rb'
 RSpec/MultipleExpectations:
   Enabled: true
   Max: 3
