@@ -15,7 +15,7 @@ module API::V1::Tasks::Operation
     end
 
     def get_tasks(context, user:, **)
-      context['model'] = user.tasks
+      context['model'] = TaskSerializer.new(user.tasks, include: %w[comments])
     end
   end
 end

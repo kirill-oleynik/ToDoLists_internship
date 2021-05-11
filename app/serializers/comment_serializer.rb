@@ -2,10 +2,8 @@
 
 class CommentSerializer
   include JSONAPI::Serializer
-  attributes :id,
-             :title
-  belongs_to :task
-  attribute :image do |comment|
-    comment.image&.url
-  end
+
+  belongs_to :task, serializer: TaskSerializer
+
+  attributes :id, :title, :image_url
 end

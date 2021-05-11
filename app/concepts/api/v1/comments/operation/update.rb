@@ -22,7 +22,7 @@ module API::V1::Comments::Operation
 
     def update_comment(context, user:, params:, **)
       comment = user.tasks.find(params[:task_id]).comments.find(params[:id])
-      context[:model] = comment if comment.update(params[:comment])
+      context[:model] = CommentSerializer.new(comment) if comment.update(params[:comment])
     rescue ActiveRecord::RecordNotFound
       context[:operation_status] = :not_found
       false
