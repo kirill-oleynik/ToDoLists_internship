@@ -20,8 +20,8 @@ RSpec.describe 'PUT    /v1/tasks/:task_id/comments/:id', type: :request do
 
     it 'returns updated comment' do
       expect(response).to match_json_schema('entities/comment')
-      expect(parsed_body['task_id']).to eq(task.id)
-      expect(parsed_body['title']).to eq('title')
+      expect(parsed_body['data']['id']).to eq(comment.id)
+      expect(parsed_body['data']['attributes']['title']).to eq('title')
     end
   end
 

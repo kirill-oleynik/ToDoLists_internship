@@ -23,7 +23,7 @@ RSpec.describe 'DELETE /v1/tasks/:id', type: :request do
 
     it 'returns deleted task' do
       expect(response).to match_json_schema('entities/task')
-      expect(parsed_body['id']).to eq(task_id)
+      expect(parsed_body['data']['id']).to eq(task_id)
     end
   end
 

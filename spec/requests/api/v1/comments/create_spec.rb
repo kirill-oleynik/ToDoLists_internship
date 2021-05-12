@@ -18,8 +18,10 @@ RSpec.describe 'POST v1/comments', type: :request do
 
     it 'returns serialized comment' do
       expect(response).to match_json_schema('entities/comment')
-      expect(parsed_body['title']).to eq(params[:comment][:title])
-      expect(parsed_body['task_id']).to eq(task.id)
+      expect(parsed_body['data']['attributes']['title']).to eq(params[:comment][:title])
+      expect(
+        parsed_body['data']['relationships']['task']['data']['id']
+      ).to eq(task.id)
     end
   end
 

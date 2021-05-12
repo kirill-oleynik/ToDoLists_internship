@@ -11,18 +11,32 @@ module API
       end
 
       def update
-        endpoint operation: API::V1::Comments::Operation::Update, options: { token: found_token }
+        endpoint operation: API::V1::Comments::Operation::Update, options: { token: found_token },
+                 different_handler: update_comment_handler
       end
 
       def destroy
-        endpoint operation: API::V1::Comments::Operation::Delete, options: { token: found_token }
+        endpoint operation: API::V1::Comments::Operation::Delete, options: { token: found_token },
+                 different_handler: destroy_comment_handler
       end
 
       private
 
       def create_comment_handler
         default_handler.merge(
-          success: ->(result, **opts) { render json: result['model'], **opts, status: 201 }
+          success: ->(result, **opts) { render json: CommentSerializer.new(result['model']), **opts, status: 201 }
+        )
+      end
+
+      def update_comment_handler
+        default_handler.merge(
+          success: ->(result, **opts) { render json: CommentSerializer.new(result['model']), **opts, status: 200 }
+        )
+      end
+
+      def destroy_comment_handler
+        default_handler.merge(
+          success: ->(result, **opts) { render json: CommentSerializer.new(result['model']), **opts, status: 200 }
         )
       end
     end

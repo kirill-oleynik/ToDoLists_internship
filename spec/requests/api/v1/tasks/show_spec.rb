@@ -21,8 +21,8 @@ RSpec.describe 'GET /v1/task/:id', type: :request do
     end
 
     it 'returns requested task' do
-      expect(parsed_body['id']).to eq(task_id)
-      expect(parsed_body['user_id']).to eq(user_id)
+      expect(parsed_body['data']['id']).to eq(task_id)
+      expect(parsed_body['data']['attributes']['user_id']).to eq(user_id)
     end
   end
 

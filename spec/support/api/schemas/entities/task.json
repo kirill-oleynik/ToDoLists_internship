@@ -1,21 +1,46 @@
 {
-  "id": "file:/entities/task.json",
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
-  "required": ["id", "user_id", "title", "done", "deadline", "created_at", "updated_at"],
-  "properties":  {
-    "id": { "type": "string" },
-    "user_id": { "type": "string" },
-    "refresh": { "done": "string" },
-    "deadline": { "deadline": "string" },
-    "created_at": { "type": "string" },
-    "updated_at": { "type": "string" },
-    "relationships": {
+  "required": [ "data" ],
+  "properties": {
+    "data": {
       "type": "object",
       "properties": {
-        "comments": {
-          "type": "object"
+        "id": { "type": "string" },
+        "type": { "type": "string" },
+        "attributes": {
+          "type": "object",
+          "required": [ "id", "user_id", "title", "done", "deadline" ],
+          "properties": {
+            "id": { "type": "string" },
+            "user_id": { "type": "string" },
+            "title": { "type": "string" },
+            "done": { "type": "boolean" },
+            "deadline": { "type": "string" }
+          }
+        },
+        "relationships": {
+          "type": "object",
+          "properties": {
+            "comments": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {}
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          },
+          "required": [
+            "comments"
+          ]
         }
-      }
+      },
+      "required": [ "id", "type", "attributes", "relationships" ]
     }
   }
 }
