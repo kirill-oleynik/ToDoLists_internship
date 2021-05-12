@@ -3,8 +3,8 @@
 module Requests
   # Authentication helpers
   module AuthHelpers
-    def new_user_auth_tokens
-      JwtSession::Create.new.call(user_id: create(:user).id).login
+    def new_user_auth_tokens(user: create(:user))
+      JwtSession::Create.new.call(user_id: user.id).login
     end
   end
 

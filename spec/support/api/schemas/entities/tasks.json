@@ -1,0 +1,142 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "user_id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "done": {
+                  "type": "boolean"
+                },
+                "deadline": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "user_id",
+                "title",
+                "done",
+                "deadline"
+              ]
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "comments": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {}
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              },
+              "required": [
+                "comments"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "type",
+            "attributes",
+            "relationships"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "user_id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "done": {
+                  "type": "boolean"
+                },
+                "deadline": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "user_id",
+                "title",
+                "done",
+                "deadline"
+              ]
+            },
+            "relationships": {
+              "type": "object",
+              "properties": {
+                "comments": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {}
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              },
+              "required": [
+                "comments"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "type",
+            "attributes",
+            "relationships"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "data"
+  ]
+}

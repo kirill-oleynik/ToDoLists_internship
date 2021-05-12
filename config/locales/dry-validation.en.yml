@@ -8,3 +8,7 @@ en:
           exists?: Already exists
         password_confirmation:
           eql?: Password confirmation must match password
+        deadline:
+          future?: must be in the future
+        image:
+          supported_format?: Unsupported attachment format

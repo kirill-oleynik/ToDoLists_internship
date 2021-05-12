@@ -8,3 +8,9 @@ FactoryBot.define do
     f.password_confirmation { password }
   end
 end
+
+def create_user_with_tasks(tasks_count: 5)
+  FactoryBot.create(:user) do |user|
+    FactoryBot.create_list(:task, tasks_count, user_id: user.id)
+  end
+end

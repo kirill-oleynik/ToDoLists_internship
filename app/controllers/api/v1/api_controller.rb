@@ -7,10 +7,6 @@ module API
 
       private
 
-      def endpoint_options
-        { params: params.to_unsafe_hash }
-      end
-
       def default_cases
         {
           unauthorized: ->(result) { result.failure? && result[:operation_status] == :unauthorized },
@@ -33,6 +29,12 @@ module API
           unauthorized: ->(_result, **) { head(:unauthorized) },
           created: ->(result, **opts) { render json: result[:result], **opts, status: 201 }
         }
+      end
+
+      def custom_handler(status, serializer)
+        default_handler.merge(
+          success: ->(result, **opts) { render json: serializer.new(result[:model]), **opts, status: status }
+        )
       end
     end
   end

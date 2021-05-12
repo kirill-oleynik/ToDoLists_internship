@@ -15,6 +15,8 @@ Style/Documentation:
   Exclude:
         - 'app/models/application_record.rb'
         - 'app/controllers/**/*'
+        - 'app/uploaders/*.rb'
+        - 'app/serializers/*.rb'
 RSpec/MultipleExpectations:
   Enabled: true
   Max: 3
@@ -38,6 +40,9 @@ Lint/UnreachableCode:
   Enabled: true
   Exclude:
         - 'app/concepts/api/v1/auth/operation/sign_in.rb'
+        - 'app/concepts/api/v1/tasks/operation/create.rb'
+        - 'app/concepts/api/v1/tasks/operation/show.rb'
+        - 'app/concepts/api/v1/tasks/operation/delete.rb'
 Metrics/AbcSize:
   Enabled: true
   Exclude:
@@ -46,3 +51,6 @@ Style/SignalException:
   Enabled: true
   Exclude:
         - 'app/concepts/api/v1/auth/operation/sign_in.rb'
+        - 'app/concepts/api/v1/tasks/operation/create.rb'
+        - 'app/concepts/api/v1/tasks/operation/show.rb'
+        - 'app/concepts/api/v1/tasks/operation/delete.rb'
