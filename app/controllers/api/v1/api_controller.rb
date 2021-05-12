@@ -30,6 +30,12 @@ module API
           created: ->(result, **opts) { render json: result[:result], **opts, status: 201 }
         }
       end
+
+      def custom_handler(status, serializer)
+        default_handler.merge(
+          success: ->(result, **opts) { render json: serializer.new(result[:model]), **opts, status: status }
+        )
+      end
     end
   end
 end
