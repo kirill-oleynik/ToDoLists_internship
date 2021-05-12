@@ -9,8 +9,8 @@ FactoryBot.define do
   end
 end
 
-def create_task_with_comments(comments_count: 5)
+def create_task_with_comment
   FactoryBot.create(:task) do |task|
-    FactoryBot.create_list(:comment, comments_count, task_id: task.id)
+    FactoryBot.create(:comment, task_id: task.id)
   end
 end

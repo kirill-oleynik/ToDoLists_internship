@@ -5,7 +5,7 @@ RSpec.describe 'PUT    /v1/tasks/:task_id/comments/:id', type: :request do
 
   let(:headers) { { 'Authorization': token } }
   let(:token) { JwtSession::Create.new.call(user_id: task.user.id).login[:access] }
-  let(:task) { create_task_with_comments(comments_count: 1) }
+  let(:task) { create_task_with_comment }
   let(:comment) { task.comments.first }
   let(:params) do
     {

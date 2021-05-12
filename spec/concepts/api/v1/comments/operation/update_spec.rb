@@ -5,7 +5,7 @@ RSpec.describe API::V1::Comments::Operation::Update, type: :operation do
 
   let(:token) { new_user_auth_tokens(user: task.user)[:access] }
 
-  let(:task) { create_task_with_comments(comments_count: 1) }
+  let(:task) { create_task_with_comment }
   let(:comment) { task.comments.first }
 
   let(:params) do
